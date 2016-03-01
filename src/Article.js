@@ -16,7 +16,10 @@ class Article extends Component {
             <div>
                 <a href = "#" onClick = {this.select.bind(this)} >select</a>
                 {this.getTitle()}
-                <CSSTransition transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+                <CSSTransition transitionName="example" transitionAppear={true}
+                               transitionAppearTimeout={500}
+                               transitionEnterTimeout={500}
+                               transitionLeaveTimeout={300}>
                     {this.getBody()}
                 </CSSTransition>
             </div>
