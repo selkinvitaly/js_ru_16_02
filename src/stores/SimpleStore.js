@@ -1,10 +1,13 @@
 import { EventEmitter } from 'events'
+import Model from './Model'
 const CHANGE_EVENT = 'CHANGE_EVENT'
 
+
 class SimpleStore extends EventEmitter {
-    constructor(initialState) {
+    constructor(stores, initialState) {
         super()
-        this.__items = initialState
+        this.__stores = stores
+        this.__items = initialState.map((item) => new Model(item))
     }
 
     emitChange() {

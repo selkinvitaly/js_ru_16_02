@@ -46,7 +46,7 @@ class Article extends Component {
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
                 <p>{article.body}</p>
-                <CommentList comments = {article.comments || []} />
+                <CommentList comments = {article.getRelation('comments')} />
             </div>
         )
     }

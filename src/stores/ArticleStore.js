@@ -3,8 +3,8 @@ import { DELETE_ARTICLE } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 
 class ArticleStore extends SimpleStore {
-    constructor(initialState) {
-        super(initialState)
+    constructor(...args) {
+        super(...args)
         this.dispatchToken = AppDispatcher.register((action) => {
             const { type, data } = action
 
