@@ -1,6 +1,21 @@
-class ArticleStore {
+import { EventEmitter } from 'events'
+const CHANGE_EVENT = 'CHANGE_EVENT'
+
+class ArticleStore extends EventEmitter {
     constructor(initialState) {
         this.__items = initialState
+    }
+
+    emitChange() {
+        this.emit(CHANGE_EVENT)
+    }
+
+    addChangeListener(callback) {
+        this.on(CHANGE_EVENT, callback)
+    }
+
+    removeChangeListener(callback) {
+        this.removeListener(CHANGE_EVENT, callback)
     }
 
     getAll() {
@@ -18,6 +33,8 @@ class ArticleStore {
     delete(id) {
         this.__items = this.__items.filter(item => item.id != id)
     }
+
+
 }
 
 export default ArticleStore

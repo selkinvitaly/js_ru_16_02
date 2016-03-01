@@ -6,6 +6,15 @@ class Container extends Component {
     state = {
         articles: articlesStore.getAll()
     }
+
+    componentDidMount() {
+        articlesStore.addChangeListener(this.change)
+    }
+
+    componentWillUnmount() {
+        articlesStore.removeChangeListener(this.change)
+    }
+
     render() {
         return (
             <div>
@@ -13,6 +22,12 @@ class Container extends Component {
             </div>
         )
     }
+
+    change = () => {
+        this.setState({
+            articles: articlesStore.getAll()
+        })
+    };
 }
 
 export default Container
