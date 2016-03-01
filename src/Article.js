@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import withHint from './HOC/withHint'
+import { deleteArticle } from './actions/articles'
 require('./style.css')
 
 class Article extends Component {
@@ -43,11 +44,16 @@ class Article extends Component {
         const {article} = this.props
         return (
             <div key="article">
+                <a href="#" onClick = {this.deleteCurrentArticle}>delete this article</a>
                 <p>{article.body}</p>
                 <CommentList comments = {article.comments || []} />
             </div>
         )
     }
+
+    deleteCurrentArticle = () => {
+        deleteArticle(this.props.article.id)
+    };
 
     select(ev) {
         ev.preventDefault()
