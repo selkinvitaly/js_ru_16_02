@@ -44,14 +44,15 @@ class Article extends Component {
         const {article} = this.props
         return (
             <div key="article">
-                <a href="#" onClick = {this.deleteCurrentArticle}>delete this article</a>
+                <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
                 <p>{article.body}</p>
                 <CommentList comments = {article.comments || []} />
             </div>
         )
     }
 
-    deleteCurrentArticle = () => {
+    handleDeleteArticle = (ev) => {
+        ev.preventDefault()
         deleteArticle(this.props.article.id)
     };
 
