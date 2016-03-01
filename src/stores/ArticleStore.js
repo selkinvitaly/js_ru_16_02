@@ -1,9 +1,13 @@
 import { EventEmitter } from 'events'
 const CHANGE_EVENT = 'CHANGE_EVENT'
+import AppDispatcher from '../dispatcher'
 
 class ArticleStore extends EventEmitter {
     constructor(initialState) {
         this.__items = initialState
+        AppDispatcher.register((action) => {
+
+        })
     }
 
     emitChange() {
