@@ -18,7 +18,7 @@ class CommentList extends Component {
         return (
             <div>
                 <a href = "#" onClick = {this.toggleOpen}>{actionText}</a>
-                {isOpen ? comments : null}
+                <ul>{isOpen ? comments : null}</ul>
             </div>
         )
     }

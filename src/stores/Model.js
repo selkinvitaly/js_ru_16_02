@@ -1,10 +1,13 @@
 class Model {
-    constructor(data) {
+    constructor(data, stores) {
         Object.assign(this, data)
+        this.__stores = stores
     }
 
     getRelation(relation) {
-        return []
+        const store = this.__stores[relation]
+        if (!this[relation] || !store) return []
+        return this[relation].map(store.getById)
     }
 }
 

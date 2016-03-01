@@ -7,7 +7,8 @@ class SimpleStore extends EventEmitter {
     constructor(stores, initialState) {
         super()
         this.__stores = stores
-        this.__items = initialState.map((item) => new Model(item))
+        this.__items = []
+        if (initialState) initialState.forEach(this.add)
     }
 
     emitChange() {
@@ -26,12 +27,12 @@ class SimpleStore extends EventEmitter {
         return this.__items.slice()
     }
 
-    getById(id) {
+    getById = (id) => {
         return this.__items.filter((item) => item.id == id)[0]
     }
 
-    add(item) {
-        this.__items.push(item)
+    add = (item) => {
+        this.__items.push(new Model(item, this.__stores))
     }
 
     delete(id) {
