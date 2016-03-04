@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { DELETE_ARTICLE } from '../actions/constants'
+import { DELETE_ARTICLE, ADD_COMMENT } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 
 class ArticleStore extends SimpleStore {
@@ -12,6 +12,12 @@ class ArticleStore extends SimpleStore {
                 case DELETE_ARTICLE:
                     this.delete(data.id)
                     break;
+
+                case ADD_COMMENT:
+                    AppDispatcher.waitFor([this.__stores.comments.dispatchToken])
+                    const article = this.getById(data.articleId)
+                    article.comments = (article.comments || []).concat(data.id)
+                    break
 
                 default: return
             }

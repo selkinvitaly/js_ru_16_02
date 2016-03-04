@@ -1,11 +1,11 @@
 import {articles, comments} from '../fixtures'
 import ArticleStore from './ArticleStore'
-import SimpleStore from './SimpleStore'
+import CommentStore from './CommentStore'
 
 let stores = {}
 Object.assign(stores, {
     articles: new ArticleStore(stores, articles),
-    comments: new SimpleStore(stores, comments)
+    comments: new CommentStore(stores, comments)
 })
 
 window.stores = stores

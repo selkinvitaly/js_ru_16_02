@@ -1,26 +1,57 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
+import toggleOpen from './HOC/toggleOpen'
+import { addComment } from './actions/comment'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array
+        article: PropTypes.object,
+
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
     };
 
     state = {
-        isOpen: false
+        comment: ''
     }
 
     render() {
-        const { isOpen } = this.state
+        const { isOpen, toggleOpen } = this.props
         const actionText = isOpen ? 'hide comments' : 'show comments'
 
-        const comments = this.props.comments.map((comment) => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
-                <a href = "#" onClick = {this.toggleOpen}>{actionText}</a>
-                <ul>{isOpen ? comments : null}</ul>
+                <a href = "#" onClick = {toggleOpen}>{actionText}</a>
+                {this.getBody()}
             </div>
         )
+    }
+
+    getBody() {
+        const { article, isOpen } = this.props
+        if (!isOpen) return null
+        const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
+        return (
+            <div>
+                <ul>{isOpen ? commentList : null}</ul>
+                <input value = {this.state.comment} onChange = {this.commentChange}/>
+                <a href = "#" onClick = {this.submitComment}>add comment</a>
+            </div>
+        )
+    }
+
+    commentChange = (ev) => {
+        this.setState({
+            comment: ev.target.value
+        })
+    }
+
+    submitComment = (ev) => {
+        ev.preventDefault()
+        addComment(this.state.comment, this.props.article.id)
+        this.setState({
+            comment: ''
+        })
     }
 
     toggleOpen = (ev) => {
@@ -31,4 +62,4 @@ class CommentList extends Component {
     }
 }
 
-export default CommentList
+export default toggleOpen(CommentList)
