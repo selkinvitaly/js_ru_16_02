@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES_START, LOAD_ALL_ARICLES_FAIL, LOAD_ALL_ARTICLES_SUCCESS } from '../actions/constants'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, _START, _FAIL, _SUCCESS } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 
 class ArticleStore extends SimpleStore {
@@ -19,18 +19,18 @@ class ArticleStore extends SimpleStore {
                     article.comments = (article.comments || []).concat(data.id)
                     break
 
-                case LOAD_ALL_ARTICLES_START:
+                case LOAD_ALL_ARICLES + _START:
                     this.loading = true
                     this.loaded = false
                     break;
 
-                case LOAD_ALL_ARICLES_FAIL:
+                case LOAD_ALL_ARICLES + _FAIL:
                     this.loaded = false
                     this.loading = false
                     this.error = error
                     break
 
-                case LOAD_ALL_ARTICLES_SUCCESS:
+                case LOAD_ALL_ARICLES + _SUCCESS:
                     this.loaded = true
                     this.loading = false
                     response.forEach(this.add)

@@ -4,3 +4,9 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const LOAD_ALL_ARTICLES_START = 'LOAD_ALL_ARTICLES_START'
 export const LOAD_ALL_ARTICLES_SUCCESS = 'LOAD_ALL_ARTICLES_SUCCESS'
 export const LOAD_ALL_ARICLES_FAIL = 'LOAD_ALL_ARICLES_FAIL'
+export const LOAD_ALL_ARICLES = 'LOAD_ALL_ARICLES'
+
+
+export const _START = '_START'
+export const _SUCCESS = '_SUCCESS'
+export const _FAIL = '_FAIL'
