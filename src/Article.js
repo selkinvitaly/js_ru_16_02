@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
 import withHint from './HOC/withHint'
-import { deleteArticle } from './actions/articles'
+import { deleteArticle, loadArticleById } from './actions/articles'
 require('./style.css')
 
 class Article extends Component {
@@ -12,6 +12,11 @@ class Article extends Component {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     };
+
+    componentWillReceiveProps(newProps) {
+        const { id } = newProps.article
+        if (newProps.isOpen && !this.props.isOpen) loadArticleById({ id })
+    }
 
     render() {
         return (

@@ -18,16 +18,18 @@ class Container extends Component {
     }
 
     render() {
+        const { articles, loading } = this.state
+        if (loading) return <h3>Loading...</h3>
         return (
             <div>
-                <ArticleList articles = {this.state.articles} />
+                <ArticleList articles = {articles} />
             </div>
         )
     }
 
     change = () => {
-        console.log('---', 123, articlesStore.getAll());
         this.setState({
+            loading: articlesStore.loading,
             articles: articlesStore.getAll()
         })
     };

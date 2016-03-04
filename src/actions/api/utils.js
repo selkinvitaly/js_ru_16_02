@@ -8,16 +8,18 @@ export function asyncAC(type, apiCall) {
             data
         })
 
-        apiCall(data)
-            .done((response) => AppDispatcher.dispatch({
-                type: type + _SUCCESS,
-                response,
-                data
-            }))
-            .fail((error) => AppDispatcher.dispatch({
-                type: type + _FAIL,
-                error,
-                data
-            }))
+        setTimeout(() => {
+            apiCall(data)
+                .done((response) => AppDispatcher.dispatch({
+                    type: type + _SUCCESS,
+                    response,
+                    data
+                }))
+                .fail((error) => AppDispatcher.dispatch({
+                    type: type + _FAIL,
+                    error,
+                    data
+                }))
+        }, 1000)
     }
 }
