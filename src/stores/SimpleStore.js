@@ -24,7 +24,7 @@ class SimpleStore extends EventEmitter {
     }
 
     getAll() {
-        return this.__items.slice()
+        return this.__items.slice().sort((a,b) => a.id - b.id)
     }
 
     getById = (id) => {
@@ -32,6 +32,7 @@ class SimpleStore extends EventEmitter {
     }
 
     add = (item) => {
+        this.delete(item.id)
         this.__items.push(new Model(item, this.__stores))
     }
 

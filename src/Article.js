@@ -15,7 +15,7 @@ class Article extends Component {
 
     componentWillReceiveProps(newProps) {
         const { id } = newProps.article
-        if (newProps.isOpen && !this.props.isOpen) loadArticleById({ id })
+        if (newProps.isOpen && !this.props.isOpen && !newProps.article.text) loadArticleById({ id })
     }
 
     render() {
@@ -47,10 +47,11 @@ class Article extends Component {
     getBody() {
         if (!this.props.isOpen) return null
         const {article} = this.props
+        if (article.loading) return <div key="article!"><h2>Loading...</h2></div>
         return (
             <div key="article">
                 <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
-                <p>{article.body}</p>
+                <p>{article.text}</p>
                 <CommentList article = {article}/>
             </div>
         )

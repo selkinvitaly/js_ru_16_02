@@ -37,9 +37,11 @@ class ArticleStore extends SimpleStore {
                     break;
 
                 case LOAD_ARTICLE_BY_ID + _START:
+                    this.getById(data.id).loading = true
                     break;
 
                 case LOAD_ARTICLE_BY_ID + _SUCCESS:
+                    this.add(response)
                     break;
 
                 default: return
