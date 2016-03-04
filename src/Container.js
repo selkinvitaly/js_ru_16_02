@@ -5,12 +5,11 @@ import { loadAllArticles } from './actions/articles'
 
 class Container extends Component {
     state = {
-        articles: articlesStore.getAll()
+        articles: articlesStore.getOrLoadAll()
     }
 
     componentDidMount() {
         articlesStore.addChangeListener(this.change)
-        loadAllArticles()
     }
 
     componentWillUnmount() {
