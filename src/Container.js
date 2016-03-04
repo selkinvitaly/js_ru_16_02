@@ -26,6 +26,7 @@ class Container extends Component {
     }
 
     change = () => {
+        console.log('---', 123, articlesStore.getAll());
         this.setState({
             articles: articlesStore.getAll()
         })
