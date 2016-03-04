@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { articlesStore } from './stores'
 import ArticleList from './ArticleList'
+import { loadAllArticles } from './actions/articles'
 
 class Container extends Component {
     state = {
@@ -9,6 +10,7 @@ class Container extends Component {
 
     componentDidMount() {
         articlesStore.addChangeListener(this.change)
+        loadAllArticles()
     }
 
     componentWillUnmount() {
