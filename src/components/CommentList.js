@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
-import toggleOpen from './HOC/toggleOpen'
-import { addComment } from './actions/comment'
+import toggleOpen from './../HOC/toggleOpen'
+import { addComment } from './../actions/comment'
 
 class CommentList extends Component {
     static propTypes = {

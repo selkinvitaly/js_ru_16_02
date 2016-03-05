@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CommentList from './CommentList'
-import toggleOpen from './mixins/toggleOpen'
-import withHint from './mixins/withHint'
+import toggleOpen from './../mixins/toggleOpen'
+import withHint from './../mixins/withHint'
 
 const Article = React.createClass({
     mixins: [toggleOpen, withHint],

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { articlesStore } from './stores'
 import ArticleList from './ArticleList'
-import { loadAllArticles } from './actions/articles'
+import { loadAllArticles } from './../actions/articles'
 
 class Container extends Component {
     state = {

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
-import withHint from './HOC/withHint'
-import { deleteArticle, loadArticleById } from './actions/articles'
-require('./style.css')
+import withHint from './../HOC/withHint'
+import { deleteArticle, loadArticleById } from './../actions/articles'
+require('./../style.css')
 
 class Article extends Component {
     static propTypes = {

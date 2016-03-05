@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Hint from '../Hint'
+import Hint from '../components/Hint'
 
 export default function (CustomComponent) {
     return class extends Component {

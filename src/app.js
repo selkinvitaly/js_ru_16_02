@@ -1,4 +1,4 @@
-import Container from './Container'
+import Container from './components/Container'
 import ReactDOM from 'react-dom'
 import React from 'react'
 
