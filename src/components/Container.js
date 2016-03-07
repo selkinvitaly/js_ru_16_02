@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { articlesStore } from './stores'
+import { articlesStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles } from './../actions/articles'
 
