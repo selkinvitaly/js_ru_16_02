@@ -1,5 +1,5 @@
 import SimpleStore from './SimpleStore'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, LOAD_ARTICLE_BY_ID,_START, _FAIL, _SUCCESS } from '../actions/constants'
+import { LOAD_COMMENTS_FOR_ARTICLE, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, LOAD_ARTICLE_BY_ID,_START, _FAIL, _SUCCESS } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
 import { loadAllArticles } from '../actions/articles'
 
@@ -43,6 +43,10 @@ class ArticleStore extends SimpleStore {
 
                 case LOAD_ARTICLE_BY_ID + _SUCCESS:
                     this.add(response)
+                    break;
+
+                case LOAD_COMMENTS_FOR_ARTICLE + _SUCCESS:
+                    AppDispatcher.waitFor([this.__stores.comments.dispatchToken])
                     break;
 
                 default: return
