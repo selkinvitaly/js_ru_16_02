@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import CommentList from './CommentList'
 import toggleOpen from './../mixins/toggleOpen'
-import withHint from './../mixins/withHint'
 
 const Article = React.createClass({
-    mixins: [toggleOpen, withHint],
+    mixins: [toggleOpen],
 
     componentDidMount() {
         console.log('---', this.refs.container);
@@ -14,7 +13,6 @@ const Article = React.createClass({
         return (
             <div ref="container">
                 <a href = "#" onClick = {this.select} >select</a>
-                {this.getHint()}
                 {this.getTitle()}
                 {this.getBody()}
             </div>
@@ -25,7 +23,7 @@ const Article = React.createClass({
         const { title } = this.props.article
         const selectedStyle = this.props.selected ? {color: 'red'} : null;
         return  (
-            <h3 style = {selectedStyle} onClick={this.toggleOpen} onMouseEnter = {this.showHint(title)} onMouseLeave={this.hideHint}>
+            <h3 style = {selectedStyle} onClick={this.toggleOpen}>
                 {title}
             </h3>
         )
