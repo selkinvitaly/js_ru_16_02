@@ -5,7 +5,8 @@ import { loadAllArticles } from './../actions/articles'
 
 class Container extends Component {
     state = {
-        articles: articlesStore.getOrLoadAll()
+        articles: articlesStore.getOrLoadAll(),
+        loading: articlesStore.loading
     }
 
     componentDidMount() {
@@ -22,6 +23,7 @@ class Container extends Component {
         return (
             <div>
                 <ArticleList articles = {articles} />
+                {this.props.children}
             </div>
         )
     }
@@ -33,5 +35,6 @@ class Container extends Component {
         })
     };
 }
+
 
 export default Container

@@ -8,14 +8,12 @@ class ArticleList extends Component {
     constructor() {
         super()
         this.state = {
-            open: null,
-            selected: []
+            open: null
         }
     }
     render() {
         return (
             <div>
-                {this.getFilter()}
                 <ul>
                     {this.getArticles()}
                 </ul>
@@ -24,9 +22,7 @@ class ArticleList extends Component {
     }
 
     getArticles() {
-        const { selected } = this.state
         return this.props.articles
-            .filter(({ id }) => selected.includes(id.toString()))
             .map((article) =>
                 <li key={article.id}>
                     <Article article={article}
