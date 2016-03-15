@@ -20,7 +20,6 @@ class Article extends Component {
     render() {
         return (
             <div>
-                <a href = "#" onClick = {this.select.bind(this)} >select</a>
                 {this.getTitle()}
                 <CSSTransition transitionName="example" transitionAppear={true}
                                transitionAppearTimeout={500}
@@ -59,11 +58,6 @@ class Article extends Component {
         ev.preventDefault()
         deleteArticle(this.props.article.id)
     };
-
-    select(ev) {
-        ev.preventDefault()
-        this.props.select()
-    }
 }
 
 export default Article

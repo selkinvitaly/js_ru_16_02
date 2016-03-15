@@ -1,27 +1,32 @@
 import React, { Component, PropTypes } from 'react'
 import Article from './Article'
 import CommentList from './CommentList'
+import Select from 'react-select'
+require('react-select/dist/react-select.css')
 
 class ArticleList extends Component {
     constructor() {
         super()
         this.state = {
-            selected: [],
-            open: null
+            open: null,
+            selected: []
         }
     }
     render() {
-        const articles = this.props.articles.map((article) =>
-            <li key={article.id}>
-                <Article article={article}
-                         isOpen = {article.id === this.state.open}
-                         onClick = {this.open.bind(this, article.id)}
-                         select = {this.select(article.id).bind(this)}
-                         selected = {this.state.selected.includes(article.id)}/>
-            </li>
-        )
+        const { selected } = this.state
+        const articles = this.props.articles
+            .filter(({ id }) => selected.includes(id))
+            .map((article) =>
+                <li key={article.id}>
+                    <Article article={article}
+                             isOpen = {article.id === this.state.open}
+                             onClick = {this.open.bind(this, article.id)}
+                             />
+                </li>
+            )
         return (
             <div>
+                {this.getFilter()}
                 <ul>
                     {articles}
                 </ul>
@@ -29,16 +34,27 @@ class ArticleList extends Component {
         )
     }
 
-    open(open) {
-        this.setState({ open })
+    getFilter() {
+        const options = this.props.articles.map(({ title, id }) => {
+            return {
+                label: title,
+                value: id.toString()
+            }
+        })
+        return <Select
+            value = {this.state.selected}
+            options = {options}
+            multi = {true}
+            onChange = {this.changeFilter}
+        />
     }
 
-    select(id) {
-        return function() {
-            this.setState({
-                selected: this.state.selected.concat(id)
-            })
-        }
+    changeFilter = (selected) => {
+        this.setState({ selected })
+    }
+
+    open(open) {
+        this.setState({ open })
     }
 }
 
