@@ -13,25 +13,28 @@ class ArticleList extends Component {
         }
     }
     render() {
+        return (
+            <div>
+                {this.getFilter()}
+                <ul>
+                    {this.getArticles()}
+                </ul>
+            </div>
+        )
+    }
+
+    getArticles() {
         const { selected } = this.state
-        const articles = this.props.articles
+        return this.props.articles
             .filter(({ id }) => selected.includes(id.toString()))
             .map((article) =>
                 <li key={article.id}>
                     <Article article={article}
                              isOpen = {article.id === this.state.open}
                              onClick = {this.open.bind(this, article.id)}
-                             />
+                    />
                 </li>
             )
-        return (
-            <div>
-                {this.getFilter()}
-                <ul>
-                    {articles}
-                </ul>
-            </div>
-        )
     }
 
     getFilter() {
