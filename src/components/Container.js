@@ -32,7 +32,12 @@ class Container extends Component {
     getMenu() {
         const links = this.state.articles.map((article) =>
             <li key={article.id}>
-                <Link to={`/articles/${article.id}`}>{article.title}</Link>
+                <Link to={`/articles/${article.id}`}
+                    activeClassName = "active"
+                    activeStyle = {{color: 'red'}}
+                >
+                    {article.title}
+                </Link>
             </li>)
         return <ul>{links}</ul>
     }
