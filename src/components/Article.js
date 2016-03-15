@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import CSSTransition from 'react-addons-css-transition-group'
-import { deleteArticle, loadArticleById } from './../actions/articles'
+import { deleteArticle } from './../actions/articles'
 require('./../style.css')
 
 class Article extends Component {
@@ -11,11 +11,6 @@ class Article extends Component {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     };
-
-    componentWillReceiveProps(newProps) {
-        const { id } = newProps.article
-        if (newProps.isOpen && !this.props.isOpen && !newProps.article.text) loadArticleById({ id })
-    }
 
     render() {
         return (
@@ -42,7 +37,6 @@ class Article extends Component {
     }
 
     getBody() {
-        if (!this.props.isOpen) return null
         const {article} = this.props
         if (article.loading) return <div key="article!"><h2>Loading...</h2></div>
         return (

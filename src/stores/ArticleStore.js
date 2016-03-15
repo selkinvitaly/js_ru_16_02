@@ -38,11 +38,14 @@ class ArticleStore extends SimpleStore {
                     break;
 
                 case LOAD_ARTICLE_BY_ID + _START:
+                    console.log('---', data.id, this.getById(data.id));
                     this.getById(data.id).loading = true
+                    this.emitChange()
                     break;
 
                 case LOAD_ARTICLE_BY_ID + _SUCCESS:
                     this.add(response)
+                    this.emitChange()
                     break;
 
                 case LOAD_COMMENTS_FOR_ARTICLE + _SUCCESS:
