@@ -15,7 +15,7 @@ class ArticleList extends Component {
     render() {
         const { selected } = this.state
         const articles = this.props.articles
-            .filter(({ id }) => selected.includes(id))
+            .filter(({ id }) => selected.includes(id.toString()))
             .map((article) =>
                 <li key={article.id}>
                     <Article article={article}
@@ -38,7 +38,7 @@ class ArticleList extends Component {
         const options = this.props.articles.map(({ title, id }) => {
             return {
                 label: title,
-                value: id.toString()
+                value: id
             }
         })
         return <Select
@@ -50,7 +50,9 @@ class ArticleList extends Component {
     }
 
     changeFilter = (selected) => {
-        this.setState({ selected })
+        this.setState({
+            selected: selected.split(',')
+        })
     }
 
     open(open) {
