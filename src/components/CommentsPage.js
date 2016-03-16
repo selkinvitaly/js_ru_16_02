@@ -37,7 +37,7 @@ class CommentsPage extends Component {
 
     return this.state.loading
       ? <li>loading comments...</li>
-      : comments.map(comment => <li key={comment.id}>{comment:user}: {comment.text}</li>);
+      : comments.map(comment => <li key={comment.id}>{comment.user}: {comment.text}</li>);
   }
 
   generatePager(count) {
