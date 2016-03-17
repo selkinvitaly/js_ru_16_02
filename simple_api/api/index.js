@@ -1,10 +1,9 @@
 var router = require('express').Router();
 var mocks = require('./mock');
-var assign = require('object-assign');
 
 router.get('/article', function (req, res, next) {
     var articles = withComments(mocks.articles).map(function (article) {
-            return assign({}, article, {
+            return Object.assign({}, article, {
                 text: undefined
             })
         }),
