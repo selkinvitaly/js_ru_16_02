@@ -1,6 +1,7 @@
 "use strict";
 
 import React, { Component, PropTypes } from "react";
+import { Link } from "react-router";
 
 import { myCommentsStore } from "../stores";
 
@@ -33,7 +34,7 @@ class CommentsPage extends Component {
   }
 
   getComments() {
-    let comments = myCommentsStore.getOrLoadByPage(this.props.params.page, this.state.limit);
+    let comments = myCommentsStore.getOrLoadByPage(+this.props.params.page, this.state.limit);
 
     return this.state.loading
       ? <li>loading comments...</li>
@@ -43,8 +44,12 @@ class CommentsPage extends Component {
   generatePager(count) {
     let res = [];
 
-    for (let i = 0; i < count; i++) {
-      res.push(i);
+    for (let i = 1; i <= count; i++) {
+      res.push(
+        <li key={i}>
+          <Link to={`/comments/${i}`} activeStyle={{color: "red"}}>{i}</Link>
+        </li>
+      );
     }
 
     return res;
@@ -63,11 +68,16 @@ class CommentsPage extends Component {
   }
 
   render() {
+    console.log("RENDER");
     return (
-      <ul>
-        {this.getComments()}
-      </ul>
-      {this.getPageNav()}
+      <div>
+        <ul>
+          {this.getComments()}
+        </ul>
+        <ul>
+          {this.getPageNav()}
+        </ul>
+      </div>
     );
   }
 
