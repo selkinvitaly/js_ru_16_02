@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
-import CSSTransition from 'react-addons-css-transition-group'
 import { deleteArticle } from './../actions/articles'
 require('./../style.css')
 
@@ -16,12 +15,7 @@ class Article extends Component {
         return (
             <div>
                 {this.getTitle()}
-                <CSSTransition transitionName="example" transitionAppear={true}
-                               transitionAppearTimeout={500}
-                               transitionEnterTimeout={500}
-                               transitionLeaveTimeout={300}>
-                    {this.getBody()}
-                </CSSTransition>
+                {this.getBody()}
             </div>
         )
     }

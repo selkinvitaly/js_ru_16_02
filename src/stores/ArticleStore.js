@@ -1,7 +1,7 @@
 import SimpleStore from './SimpleStore'
 import { LOAD_COMMENTS_FOR_ARTICLE, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARICLES, LOAD_ARTICLE_BY_ID,_START, _FAIL, _SUCCESS } from '../actions/constants'
 import AppDispatcher from '../dispatcher'
-import { loadAllArticles } from '../actions/articles'
+import { loadAllArticles, loadArticleById } from '../actions/articles'
 
 class ArticleStore extends SimpleStore {
     constructor(...args) {
@@ -42,7 +42,7 @@ class ArticleStore extends SimpleStore {
                     break;
 
                 case LOAD_ARTICLE_BY_ID + _SUCCESS:
-                    this.add(response)
+                    this.add(response).loaded = true
                     break;
 
                 case LOAD_COMMENTS_FOR_ARTICLE + _SUCCESS:
@@ -59,6 +59,12 @@ class ArticleStore extends SimpleStore {
     getOrLoadAll() {
         if (!this.loading && !this.loaded) loadAllArticles()
         return this.getAll()
+    }
+
+    getOrLoadById(id) {
+        const item = this.getById(id)
+        if (!item.loading && !item.loaded) setTimeout(() => loadArticleById({ id }), 0)
+        return item
     }
 }
 

@@ -33,7 +33,9 @@ class SimpleStore extends EventEmitter {
 
     add = (item) => {
         this.delete(item.id)
-        this.__items.push(new Model(item, this.__stores))
+        const dataItem = new Model(item, this.__stores)
+        this.__items.push(dataItem)
+        return dataItem
     }
 
     delete(id) {

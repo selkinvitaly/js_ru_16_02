@@ -7,9 +7,8 @@ class ArticlePage extends Component {
     constructor(props) {
         super()
         const { params: { id }} = props
-        setTimeout(() => loadArticleById({id: id}), 0)
         this.state = {
-            article: articlesStore.getById(id)
+            article: articlesStore.getOrLoadById(id)
         }
     }
     componentDidMount() {
@@ -21,14 +20,12 @@ class ArticlePage extends Component {
     }
 
     componentWillReceiveProps(props) {
-        setTimeout(() => loadArticleById({id: props.params.id}), 0)
         this.setState({
-            article: articlesStore.getById(props.params.id)
+            article: articlesStore.getOrLoadById(props.params.id)
         })
     }
 
     render() {
-        console.log('---', this.props.location.query);
         return (
             <div>
                 <Article article = {this.state.article}/>
@@ -38,7 +35,7 @@ class ArticlePage extends Component {
 
     change = () => {
         this.setState({
-            article: articlesStore.getById(this.props.params.id)
+            article: articlesStore.getOrLoadById(this.props.params.id)
         })
     }
 }
