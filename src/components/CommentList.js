@@ -11,6 +11,10 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     };
 
+    static contextTypes = {
+        router: PropTypes.object
+    }
+
     state = {
         comment: ''
     }
@@ -35,6 +39,7 @@ class CommentList extends Component {
     }
 
     getBody() {
+        console.log('--- context: ', this.context);
         const { article, isOpen } = this.props
         if (!isOpen) return null
         if (!this.checkComments()) return <h3>loading comments...</h3>

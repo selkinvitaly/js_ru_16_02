@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { articlesStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
+import { login } from '../actions/user'
 
 class Container extends Component {
     state = {
@@ -23,10 +24,16 @@ class Container extends Component {
         if (loading) return <h3>Loading...</h3>
         return (
             <div>
+                <a href = "#" onClick = {this.login}>Login</a>
                 {this.getMenu()}
                 {this.props.children}
             </div>
         )
+    }
+
+    login = (ev) => {
+        ev.preventDefault()
+        login()
     }
 
     getMenu() {
