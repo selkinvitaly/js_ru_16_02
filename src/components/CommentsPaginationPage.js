@@ -13,8 +13,8 @@ class CommentsIndex extends Component {
         commentStore.removeChangeListener(this.change)
     }
 
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context)
         const { page } = props.params
         this.state = this.getState(page)
     }

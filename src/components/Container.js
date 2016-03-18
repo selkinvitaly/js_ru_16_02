@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { articlesStore } from '../stores'
+import { articlesStore, usersStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
@@ -8,15 +8,28 @@ import { login } from '../actions/user'
 class Container extends Component {
     state = {
         articles: articlesStore.getOrLoadAll(),
-        loading: articlesStore.loading
+        loading: articlesStore.loading,
+        currentUser: usersStore.currentUser
     }
 
     componentDidMount() {
         articlesStore.addChangeListener(this.change)
+        usersStore.addChangeListener(this.changeUser)
     }
 
     componentWillUnmount() {
         articlesStore.removeChangeListener(this.change)
+        usersStore.removeChangeListener(this.changeUser)
+    }
+
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.currentUser
+        }
     }
 
     render() {
@@ -54,6 +67,12 @@ class Container extends Component {
     handleNewClick = (ev) => {
         ev.preventDefault()
         createNewArticle()
+    }
+
+    changeUser = () => {
+        this.setState({
+            currentUser: usersStore.currentUser
+        })
     }
 
     change = () => {
