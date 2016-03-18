@@ -29,8 +29,6 @@ class CommentsIndex extends Component {
 
     change = (props) => {
         const { page } =  (props || this.props).params
-        console.log('---', 321, this);
-        //debugger;
         this.setState(this.getState(page))
     }
 
@@ -39,9 +37,17 @@ class CommentsIndex extends Component {
     }
 
     render() {
+        const { loading, loaded, comments } = this.state
+        if (!loaded || loading) return <h1>Loading</h1>
+        if (!comments.length) return <h1>Sorry, no comments here</h1>
+        const commentItems = comments.map(comment =>
+            <li key = {comment.id}>{comment.text}</li>
+        )
         return (
             <div>
-                <h1>Hello world</h1>
+                <ul>
+                    {commentItems}
+                </ul>
             </div>
         )
     }
