@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { articlesStore } from '../stores'
 import ArticleList from './ArticleList'
-import { loadAllArticles } from './../actions/articles'
+import { loadAllArticles, createNewArticle } from './../actions/articles'
 
 class Container extends Component {
     state = {
@@ -39,7 +39,14 @@ class Container extends Component {
                     {article.title}
                 </Link>
             </li>)
-        return <ul>{links}</ul>
+        return <div>
+            <ul>{links}</ul>
+            <a href="#" onClick={this.handleNewClick}>create new article</a>
+        </div>
+    }
+    handleNewClick = (ev) => {
+        ev.preventDefault()
+        createNewArticle()
     }
 
     change = () => {
