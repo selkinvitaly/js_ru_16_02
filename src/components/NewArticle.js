@@ -4,7 +4,8 @@ import { login } from '../actions/user'
 class NewArticle extends Component {
 
     static contextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.object
     }
 
     getContent() {
@@ -13,8 +14,8 @@ class NewArticle extends Component {
 
     loginRequired() {
         return <div>
-            <p>You need login:</p>
-            <p><button onClick={this.login}>Login</button></p>
+            <p>{this.context.lang.needLogin}:</p>
+            <p><button onClick={this.login}>{this.context.lang.login}</button></p>
         </div>
     }
 

@@ -13,7 +13,8 @@ class CommentList extends Component {
 
     static contextTypes = {
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.object
     }
 
     state = {
@@ -29,7 +30,7 @@ class CommentList extends Component {
 
     render() {
         const { isOpen, toggleOpen } = this.props
-        const actionText = isOpen ? 'hide comments' : 'show comments'
+        const actionText = isOpen ? this.context.lang.hideComments : this.context.lang.showComments
 
         return (
             <div>
@@ -50,7 +51,7 @@ class CommentList extends Component {
                 user: {this.context.user}
                 <ul>{isOpen ? commentList : null}</ul>
                 <input value = {this.state.comment} onChange = {this.commentChange}/>
-                <a href = "#" onClick = {this.submitComment}>add comment</a>
+                <a href = "#" onClick = {this.submitComment}>{this.context.lang.addComment}</a>
             </div>
         )
     }

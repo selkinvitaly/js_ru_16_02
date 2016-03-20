@@ -5,6 +5,11 @@ class CommentsIndex extends Component {
     static propTypes = {
 
     };
+
+    static contextTypes = {
+        lang: PropTypes.object
+    }
+
     componentDidMount() {
         commentStore.addChangeListener(this.change)
     }
@@ -38,8 +43,8 @@ class CommentsIndex extends Component {
 
     render() {
         const { loading, loaded, comments } = this.state
-        if (!loaded || loading) return <h1>Loading</h1>
-        if (!comments.length) return <h1>Sorry, no comments here</h1>
+        if (!loaded || loading) return <h1>{this.context.lang.loading}</h1>
+        if (!comments.length) return <h1>{this.context.lang.noComments}</h1>
         const commentItems = comments.map(comment =>
             <li key = {comment.id}>{comment.text}</li>
         )

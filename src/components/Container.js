@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { articlesStore, usersStore } from '../stores'
+import { articlesStore, usersStore, langsStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
@@ -23,21 +23,23 @@ class Container extends Component {
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.object
     }
 
     getChildContext() {
         return {
-            user: this.state.currentUser
+            user: this.state.currentUser,
+            lang: langsStore.getDict().ru || {}
         }
     }
 
     render() {
         const { loading } = this.state
-        if (loading) return <h3>Loading...</h3>
+        if (loading) return <h3>{langsStore.getDict().ru.loading}</h3>
         return (
             <div>
-                <a href = "#" onClick = {this.login}>Login</a>
+                <a href = "#" onClick = {this.login}>{langsStore.getDict().ru.login}</a>
                 {this.getMenu()}
                 {this.props.children}
             </div>
@@ -61,7 +63,7 @@ class Container extends Component {
             </li>)
         return <div>
             <ul>{links}</ul>
-            <a href="#" onClick={this.handleNewClick}>create new article</a>
+            <a href="#" onClick={this.handleNewClick}>{langsStore.getDict().ru.createNewArticle}</a>
         </div>
     }
     handleNewClick = (ev) => {
