@@ -27,6 +27,10 @@ class Container extends Component {
         lang: PropTypes.object
     }
 
+    static contextTypes = {
+        lang: PropTypes.object
+    }
+
     getChildContext() {
         return {
             user: this.state.currentUser,

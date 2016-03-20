@@ -9,12 +9,12 @@ class NewArticle extends Component {
     }
 
     getContent() {
-        return <h2>New Article Page</h2>
+        return <h2>{this.context.lang.newArticlePage}</h2>
     }
 
     loginRequired() {
         return <div>
-            <p>{this.context.lang.needLogin}:</p>
+            <p>{this.context.lang.needLogin}</p>
             <p><button onClick={this.login}>{this.context.lang.login}</button></p>
         </div>
     }
@@ -27,7 +27,7 @@ class NewArticle extends Component {
     render() {
         return (
             <div>
-                this.context.user ? {this.getContent()} : {this.loginRequired()}
+                {this.context.user ? this.getContent() : this.loginRequired()}
             </div>
         )
     }

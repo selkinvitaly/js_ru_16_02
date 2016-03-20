@@ -44,7 +44,7 @@ class CommentList extends Component {
 //        console.log('--- context: ', this.context.user);
         const { article, isOpen } = this.props
         if (!isOpen) return null
-        if (!this.checkComments()) return <h3>loading comments...</h3>
+        if (!this.checkComments()) return <h3>{this.context.lang.loadingComments}</h3>
         const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
