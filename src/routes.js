@@ -14,7 +14,10 @@ export default (
         <Route path="/articles" component = {Container}>
             {/*<IndexRedirect to="/articles/1" />*/}
             <IndexRoute component = {ArticleIndexPage}/>
-            <Route path="/new" component = { NewArticlePage} />
+            <Route path="/new" component = { NewArticlePage}
+                onEnter = {(...args) => console.log('entering route', args)}
+                onLeave = {(...args) => console.log('leaving route', args)}
+            />
             <Route path="/articles/:id" component = { ArticlePage } />
         </Route>
         <Route path="/comments" component = {CommentsIndex}>
