@@ -4,10 +4,12 @@ import { articlesStore, usersStore } from '../stores'
 import ArticleList from './ArticleList'
 import { loadAllArticles, createNewArticle } from './../actions/articles'
 import { login } from '../actions/user'
+import dictionary from '../dictionary'
 
 class Container extends Component {
     state = {
         articles: articlesStore.getOrLoadAll(),
+        language: 'en',
         loading: articlesStore.loading,
         currentUser: usersStore.currentUser
     }
@@ -23,12 +25,14 @@ class Container extends Component {
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        i18n: PropTypes.object
     }
 
     getChildContext() {
         return {
-            user: this.state.currentUser
+            user: this.state.currentUser,
+            i18n: dictionary[this.state.language]
         }
     }
 
@@ -38,10 +42,19 @@ class Container extends Component {
         return (
             <div>
                 <a href = "#" onClick = {this.login}>Login</a>
+                <ul>
+                    <li><a href="#" onClick = {this.changeLang('en')}>EN</a></li>
+                    <li><a href="#" onClick = {this.changeLang('ru')}>RU</a></li>
+                </ul>
                 {this.getMenu()}
                 {this.props.children}
             </div>
         )
+    }
+
+    changeLang = (language) => (ev) => {
+        ev.preventDefault()
+        this.setState({ language })
     }
 
     login = (ev) => {

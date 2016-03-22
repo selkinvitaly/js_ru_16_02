@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CommentList from './CommentList'
 import { deleteArticle } from './../actions/articles'
+import translate from '../HOC/Translate'
 require('./../style.css')
 
 class Article extends Component {
@@ -38,11 +39,11 @@ class Article extends Component {
     }
 
     getBody() {
-        const {article} = this.props
-        if (article.loading) return <div key="article!"><h2>Loading...</h2></div>
+        const {article, translate} = this.props
+        if (article.loading) return <div key="article!"><h2>{translate('loading')}...</h2></div>
         return (
             <div key="article">
-                <a href="#" onClick = {this.handleDeleteArticle}>delete this article</a>
+                <a href="#" onClick = {this.handleDeleteArticle}>{translate('delete this article')}</a>
                 <p>{article.text}</p>
                 <CommentList article = {article}/>
             </div>
@@ -55,4 +56,4 @@ class Article extends Component {
     };
 }
 
-export default Article
+export default translate(Article)

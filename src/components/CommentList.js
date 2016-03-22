@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from './../HOC/toggleOpen'
 import { addComment, loadCommentsForArticle } from './../actions/comment'
+import translate from '../HOC/Translate'
 
 class CommentList extends Component {
     static propTypes = {
@@ -28,8 +29,8 @@ class CommentList extends Component {
     }
 
     render() {
-        const { isOpen, toggleOpen } = this.props
-        const actionText = isOpen ? 'hide comments' : 'show comments'
+        const { isOpen, toggleOpen, translate } = this.props
+        const actionText = translate(isOpen ? 'hide comments' : 'show comments')
 
         return (
             <div>
@@ -41,9 +42,9 @@ class CommentList extends Component {
 
     getBody() {
 //        console.log('--- context: ', this.context.user);
-        const { article, isOpen } = this.props
+        const { article, isOpen, translate } = this.props
         if (!isOpen) return null
-        if (!this.checkComments()) return <h3>loading comments...</h3>
+        if (!this.checkComments()) return <h3>{translate('loading')}...</h3>
         const commentList = article.getRelation('comments').map(comment => <li key={comment.id}><Comment comment = {comment}/></li>)
         return (
             <div>
@@ -82,4 +83,4 @@ class CommentList extends Component {
     }
 }
 
-export default toggleOpen(CommentList)
+export default translate(toggleOpen(CommentList))
