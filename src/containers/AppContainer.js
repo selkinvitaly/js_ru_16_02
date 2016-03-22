@@ -9,18 +9,23 @@ class AppContainer extends Component {
     };
 
     render() {
-        const { counter, increment } = this.props
+        const { counter, articles, increment } = this.props
         return (
             <div>
                 <h1 onClick={() => increment(10)}>{counter}</h1>
+                <ul>{this.getArticles()}</ul>
             </div>
         )
+    }
+
+    getArticles() {
+        return this.props.articles.map(article => <li key={article.id}>{article.title}</li>)
     }
 }
 
 export default connect((state) => {
-    const {counter} = state
-    return {counter}
+    const {counter, articles} = state
+    return {counter, articles}
 }, {
     increment
 })(AppContainer)
