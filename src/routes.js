@@ -8,6 +8,7 @@ import NotFound from './components/NotFound'
 import ArticleIndexPage from './components/ArticleIndexPage'
 import CommentsIndex from './components/CommentsIndex'
 import CommentsPaginationPage from './components/CommentsPaginationPage'
+import { usersStore } from './stores'
 
 export default (
     <Router history = {history} >
@@ -15,7 +16,7 @@ export default (
             {/*<IndexRedirect to="/articles/1" />*/}
             <IndexRoute component = {ArticleIndexPage}/>
             <Route path="/new" component = { NewArticlePage}
-                onEnter = {(...args) => console.log('entering route', args)}
+                onEnter = {checkAuth}
                 onLeave = {(...args) => console.log('leaving route', args)}
             />
             <Route path="/articles/:id" component = { ArticlePage } />
@@ -27,3 +28,7 @@ export default (
         <Route path = "*" component = {NotFound} />
     </Router>
 )
+
+function checkAuth(route, replace) {
+    if (!usersStore.currentUser) replace('/articles')
+}
