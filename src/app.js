@@ -3,4 +3,4 @@ import ReactDOM from 'react-dom'
 import Root from './containers/Root'
 import store from './store'
 
-ReactDOM.render(<Root />, document.getElementById('container'))
+ReactDOM.render(<Root store = {store} />, document.getElementById('container'))
