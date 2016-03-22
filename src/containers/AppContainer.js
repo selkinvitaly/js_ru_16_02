@@ -12,7 +12,7 @@ class AppContainer extends Component {
         const { counter, increment } = this.props
         return (
             <div>
-                <h1 onClick={increment}>{counter}</h1>
+                <h1 onClick={() => increment(10)}>{counter}</h1>
             </div>
         )
     }

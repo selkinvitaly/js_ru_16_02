@@ -1,5 +1,6 @@
-export function increment() {
+export function increment(value) {
     return {
-        type: 'increment'
+        type: 'increment',
+        data: { value }
     }
 }
