@@ -12,19 +12,20 @@ import { usersStore } from './stores'
 
 export default (
     <Router history = {history} >
-        <Route path="/articles" component = {Container}>
-            {/*<IndexRedirect to="/articles/1" />*/}
-            <IndexRoute component = {ArticleIndexPage}/>
-            <Route path="/new" component = { NewArticlePage}
-                onEnter = {checkAuth}
-                onLeave = {(...args) => console.log('leaving route', args)}
-            />
-            <Route path="/articles/:id" component = { ArticlePage } />
+        <Route path=":lang">
+            <Route path="articles" component = {Container}>
+                {/*<IndexRedirect to="/articles/1" />*/}
+                <IndexRoute component = {ArticleIndexPage}/>
+                <Route path="/new" component = { NewArticlePage}
+                    onEnter = {checkAuth}
+                    onLeave = {(...args) => console.log('leaving route', args)}
+                />
+                <Route path=":id" component = { ArticlePage } />
+            </Route>
+            <Route path="comments" component = {CommentsIndex}>
+                <Route path = ":page" component = {CommentsPaginationPage} />
+            </Route>
         </Route>
-        <Route path="/comments" component = {CommentsIndex}>
-            <Route path = ":page" component = {CommentsPaginationPage} />
-        </Route>
-        <Redirect from = "/:id" to="/articles/:id" />
         <Route path = "*" component = {NotFound} />
     </Router>
 )
